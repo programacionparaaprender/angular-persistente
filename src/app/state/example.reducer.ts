@@ -16,6 +16,10 @@ const _exampleReducer = createReducer(
     ...state,
     someValue: payload,
   })),
+  on(ExampleActions.resetAction, (state) => ({
+    ...state,
+    someValue: '',
+  })),
 );
 
 export function exampleReducer(state: ExampleState | undefined, action: Action) {

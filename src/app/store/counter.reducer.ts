@@ -1,16 +1,38 @@
-import { createReducer, on } from '@ngrx/store';
 import { increment, decrement, reset } from './counter.actions';
+// src/app/state/example.reducer.ts
+import { createReducer, on, Action } from '@ngrx/store';
+import * as ExampleActions from './counter.actions';
 
 
-/* export interface CounterState {
-    counterValue: number;
-  } */
 
-export const initialCounterState = 0;
+export interface CounterState {
+  counterValue: number;
+}
 
-export const counterReducer = createReducer(
+export const initialCounterState: CounterState = {
+  counterValue: 0,
+};
+
+const _counterReducer = createReducer(
   initialCounterState,
-  on(increment, (state) => state + 1),
-  on(decrement, (state) => state - 1),
-  on(reset, (state) => 0)
+  on(ExampleActions.counterAction, (state, { payload }) => ({
+    ...state,
+    counterValue: payload,
+  })),
+  on(increment, (state) => ({
+    ...state,
+    counterValue: state.counterValue + 1,
+  })),
+  on(decrement, (state) => ({
+    ...state,
+    counterValue: state.counterValue - 1,
+  })),
+  on(reset, (state) => ({
+    ...state,
+    counterValue: 0,
+  }))
 );
+
+export function counterReducer(state: CounterState | undefined, action: Action) {
+  return _counterReducer(state, action);
+}

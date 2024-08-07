@@ -1,12 +1,12 @@
-import { initialCounterState } from "./counter.reducer"; 
+import { CounterState, initialCounterState } from "../store/counter.reducer";
 
 // src/app/state/app.state.ts
-export interface AppState {
+export interface AppCountState {
     // Define los estados aquí
-    counterState: number;
+    counterState: CounterState;
   }
   
-  export const initialState: AppState = {
+  export const initialState: AppCountState = {
     counterState: initialCounterState,
   };
   

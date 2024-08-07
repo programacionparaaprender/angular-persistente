@@ -1,10 +1,10 @@
 // src/app/state/example.selectors.ts
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-//import { CounterState } from './counter.reducer';
+import { CounterState } from './counter.reducer';
 
-export const selectExampleState = createFeatureSelector<number>('counterState');
+export const selectCounterState = createFeatureSelector<CounterState>('counterState');
 
-export const selectSomeValue = createSelector(
-  selectExampleState,
-  (state: number) => state,
+export const selectCounterValue = createSelector(
+  selectCounterState,
+  (state: CounterState) => state.counterValue,
 );

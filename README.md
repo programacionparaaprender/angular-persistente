@@ -2,6 +2,7 @@
 
 ##
 >- estados persistentes en angular 18 standalone con ngrx
+>- estados persistentes en angular 18 standalone
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
 
