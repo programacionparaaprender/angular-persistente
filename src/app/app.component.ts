@@ -13,22 +13,7 @@ import { decrement, increment, reset } from './store/counter.actions';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, AsyncPipe, CommonModule],
-  //templateUrl: './app.component.html',
-  template: `
-    <div style="text-align:center">
-      <div>
-        <h1>{{ someValue$ | async }}</h1>
-        <button (click)="updateValue()">Update Value</button>
-        <button (click)="resetValue()">Reset Value</button>
-      </div>
-      <h1>
-        Contador: {{ counterValue$ | async }}
-      </h1>
-      <button (click)="increment()">Incrementar</button>
-      <button (click)="decrement()">Decrementar</button>
-      <button (click)="reset()">Resetear</button>
-    </div>
-  `,
+  templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
