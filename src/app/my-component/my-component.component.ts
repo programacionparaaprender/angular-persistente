@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { AppState } from '../state/app.state';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { selectSomeValue } from '../state/example.selectors';
@@ -12,17 +12,17 @@ import { decrement, increment, reset } from '../store/counter.actions';
 @Component({
   selector: 'app-my-component',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [],
   //templateUrl: './my-component.component.html',
   template: `
     <div style="text-align:center">
       <div>
-        <h1>{{ someValue$ | async }}</h1>
+        <h1>{{ someValue }}</h1>
         <button (click)="updateValue()">Update Value</button>
         <button (click)="resetValue()">Reset Value</button>
       </div>
       <h1>
-        Contador: {{ counterValue$ | async }}
+        Contador: {{ counterValue }}
       </h1>
       <button (click)="increment()">Incrementar</button>
       <button (click)="decrement()">Decrementar</button>
@@ -31,33 +31,40 @@ import { decrement, increment, reset } from '../store/counter.actions';
   `,
   styleUrl: './my-component.component.scss'
 })
-export class MyComponentComponent {
+export class MyComponentComponent implements OnInit {
   title = 'angular-persistente';
 
-  someValue$: Observable<string>;
-  counterValue$: Observable<number>;
+  someValue: string = '';
+  counterValue: number = 0;
   constructor(private store: Store<AppState>) {
-    this.someValue$ = this.store.select(selectSomeValue);
-    this.counterValue$ = this.store.select(selectCounterValue);
+  }
+  async ngOnInit() {
+    this.someValue = await firstValueFrom(this.store.select(selectSomeValue));
+    this.counterValue = await firstValueFrom(this.store.select(selectCounterValue));
   }
 
-  updateValue() {
+  async updateValue() {
     this.store.dispatch(someAction({ payload: 'New Value' }));
+    this.someValue = await firstValueFrom(this.store.select(selectSomeValue));
   }
 
-  resetValue() {
+  async resetValue() {
     this.store.dispatch(resetAction());
+    this.someValue = await firstValueFrom(this.store.select(selectSomeValue));
   }
 
-  increment() {
+  async increment() {
     this.store.dispatch(increment());
+    this.counterValue = await firstValueFrom(this.store.select(selectCounterValue));
   }
 
-  decrement() {
+  async decrement() {
     this.store.dispatch(decrement());
+    this.counterValue = await firstValueFrom(this.store.select(selectCounterValue));
   }
 
-  reset() {
+  async reset() {
     this.store.dispatch(reset());
+    this.counterValue = await firstValueFrom(this.store.select(selectCounterValue));
   }
 }
