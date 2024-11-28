@@ -10,15 +10,17 @@ import { ActionReducer, MetaReducer, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { exampleReducer } from './state/example.reducer';
-import { counterReducer } from './store/counter.reducer';
+import { exampleReducer } from './store/example/example.reducer';
+import { counterReducer } from './store/counter/counter.reducer';
 import { environment } from '../enviroments/enviroment';
+import { productReducer } from './store/product/product.reducer';
+import { ProductEffects } from './store/product/product.effects';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: ['exampleState', 'counterState'],
+    keys: ['exampleState', 'counterState', 'productState'],
     rehydrate: true,
   })(reducer);
 }
@@ -31,6 +33,7 @@ export const appConfig: ApplicationConfig = {
       {
         exampleState: exampleReducer,
         counterState: counterReducer,
+        productState: productReducer,
       },
       { metaReducers }
     ),
@@ -40,6 +43,6 @@ export const appConfig: ApplicationConfig = {
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideEffects([]),
+    provideEffects([ProductEffects]),
   ],
 };

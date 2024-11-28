@@ -1,5 +1,9 @@
 # AngularPersistente
 
+### busqueda
+>- como funciona action, effects, facade, reducer, selector, state en los store de angular, añadirlo luego al app.config.ts
+
+
 ##
 >- estados persistentes en angular 18 standalone con ngrx
 >- estados persistentes en angular 18 standalone

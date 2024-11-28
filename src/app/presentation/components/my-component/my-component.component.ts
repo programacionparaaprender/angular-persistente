@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { firstValueFrom, Observable } from 'rxjs';
-import { AppState } from '../state/app.state';
+import { AppState } from '../../../store/app.state';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { selectSomeValue } from '../state/example.selectors';
-import { resetAction, someAction } from '../state/example.actions';
-import { selectCounterValue } from '../store/counter.selectors';
-import { decrement, increment, reset } from '../store/counter.actions';
+import { selectSomeValue } from '../../../store/example/example.selectors'; 
+import { resetAction, someAction } from '../../../store/example/example.actions';
+import { selectCounterValue } from '../../../store/counter/counter.selectors';
+import { decrement, increment, reset } from '../../../store/counter/counter.actions';
 
 @Component({
   selector: 'app-my-component',
