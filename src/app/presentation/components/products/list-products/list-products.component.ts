@@ -1,10 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { firstValueFrom, Observable } from 'rxjs';
 import { AppState } from '../../../../store/app.state';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ProductFacade } from '../../../../store/product/product.facade';
+import { ProductDto } from '../../../../infraestructure/dtos/products/product.dto';
 
 @Component({
   selector: 'app-my-component',
@@ -19,6 +18,7 @@ import { ProductFacade } from '../../../../store/product/product.facade';
         }
       </div>
     </div>
+    <button (click)="addNewProduct()">Add Product</button>
   `,
   styleUrl: './list-products.component.scss'
 })
@@ -26,10 +26,13 @@ export class ListProductsComponent implements OnInit {
   title = 'angular-persistente';
   productFacade:ProductFacade = inject(ProductFacade);
   productValue:any[]=[]
-  constructor(private store: Store<AppState>) {
-  }
   async ngOnInit() {
     this.productFacade.loadProducts();
+    this.productValue = await firstValueFrom(this.productFacade.products$);
+  }
+  async addNewProduct() {
+    const product: ProductDto = { name: 'New Product', description: 'New Description', amount: 100 }; // ID se generará en el Use Case
+    this.productFacade.addProduct(product);
     this.productValue = await firstValueFrom(this.productFacade.products$);
   }
 }

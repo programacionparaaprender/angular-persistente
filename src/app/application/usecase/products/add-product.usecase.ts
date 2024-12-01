@@ -6,9 +6,9 @@ import { ProductDto } from '../../../infraestructure/dtos/products/product.dto';
 @Injectable({
   providedIn: 'root',
 })
-export class ListProductUseCase {
+export class AddProductUseCase {
   private productRepository = inject(ProductRepository);
-  execute(): Observable<ProductDto[]>{
-    return this.productRepository.getProducts();
+  execute(product:ProductDto): Observable<ProductDto>{
+    return this.productRepository.addProducts(product);
   }
 }

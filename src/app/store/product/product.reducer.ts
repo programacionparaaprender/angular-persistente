@@ -1,6 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadProductsSuccess, loadProductsFailure } from './product.actions';
-
+import { 
+  loadProductsSuccess, 
+  loadProductsFailure, 
+  addProductsSuccess, 
+  addProducts } from './product.actions';
 
 export interface ProductState {
     productsList: any[];
@@ -13,14 +16,27 @@ export const initialStateProducts: ProductState = {
   loading: false,
 };
 
+
+
+
 export const productReducer = createReducer(
   initialStateProducts,
-  on(loadProductsSuccess, (state, { products }) => ({
+
+  on(addProducts, (state:any) => ({
+    ...state,
+    loading: true,
+  })),
+  on(addProductsSuccess, (state:any, { product }) => ({
+    ...state,
+    loading: false,
+    productsList: [...state.productsList, product],
+  })),
+  on(loadProductsSuccess, (state:any, { products }) => ({
     ...state,
     productsList: products,
     loading: false,
   })),
-  on(loadProductsFailure, (state, { error }) => ({
+  on(loadProductsFailure, (state:any, { error }) => ({
     ...state,
     loading: false,
   }))
