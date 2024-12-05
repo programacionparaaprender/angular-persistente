@@ -3,6 +3,45 @@
 ### busqueda
 >- como funciona action, effects, facade, reducer, selector, state en los store de angular, añadirlo luego al app.config.ts
 
+### instalar tailwin
+>- https://tailwindcss.com/docs/guides/angular
+>- npm install -D tailwindcss postcss autoprefixer
+>- npx tailwindcss init
+
+### tailwind.config.js
+`
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}",  // Asegúrate de que Tailwind analice todos los archivos HTML y TS
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+`
+
+### postcss.config.js
+`
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+`
+
+### src/styles.css
+`
+/* src/styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+`
+
+
 
 ##
 >- estados persistentes en angular 18 standalone con ngrx
