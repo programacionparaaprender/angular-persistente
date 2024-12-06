@@ -1,4 +1,4 @@
-import { increment, decrement, reset } from './counter.actions';
+import { increment, decrement, reset, incrementSuccess, incrementFailure } from './counter.actions';
 // src/app/state/example.reducer.ts
 import { createReducer, on, Action } from '@ngrx/store';
 import * as ExampleActions from './counter.actions';
@@ -22,6 +22,13 @@ const _counterReducer = createReducer(
   on(increment, (state) => ({
     ...state,
     counterValue: state.counterValue + 1,
+  })),
+  on(incrementSuccess, (state, {counters}) => ({
+    ...state,
+    counterValue: counters + 1,
+  })),
+  on(incrementFailure, (state:any, { error }) => ({
+    ...state,
   })),
   on(decrement, (state) => ({
     ...state,

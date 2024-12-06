@@ -15,6 +15,7 @@ import { counterReducer } from './store/counter/counter.reducer';
 import { environment } from '../enviroments/enviroment';
 import { productReducer } from './store/product/product.reducer';
 import { ProductEffects } from './store/product/product.effects';
+import { CounterEffects } from './store/counter/counter.effects';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -43,6 +44,8 @@ export const appConfig: ApplicationConfig = {
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideEffects([ProductEffects]),
+    provideEffects([ProductEffects,
+      
+    ]),
   ],
 };
