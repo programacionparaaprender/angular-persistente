@@ -1,12 +1,11 @@
-<div>
+
+<div style="text-align:center">
     <div>
-    <ul>
-        @for(product of productValue; track product){
-            <li>
-                {{product.name}}
-            </li>
-        }
-    </ul>
+        <h1>{{ 'productos' | uppercase }}</h1>
+    @for(product of productValue; track product){
+        {{product.name}}
+    }
+
     </div>
 </div>
 <div class="card card-default">

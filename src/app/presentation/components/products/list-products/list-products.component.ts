@@ -5,10 +5,12 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { ProductFacade } from '../../../../store/product/product.facade';
 import { ProductDto } from '../../../../infraestructure/dtos/products/product.dto';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UppercasePipe } from '../../../../shared/pipes/uppercase.pipe';
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, UppercasePipe],
+
   templateUrl: './list-products.component.html',
   /* template: `
     <div style="text-align:center">
