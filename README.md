@@ -41,6 +41,13 @@ module.exports = {
 
 `
 
+### src/styles.scss
+`
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+`
+
 
 
 ##
